@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import ProductCard from "./components/productcard";
 import SearchBar from "./components/SearchBar";
+import CategoryFilter from "./components/CategoryFilter";
 
 function App() {
   const [products, setProducts] = useState([]);
@@ -22,10 +23,24 @@ function App() {
     );
     const data = await res.json();
     if (data.status === 1) {
-      setProducts([data.product]); // Wrap in array to reuse ProductCard
+      setProducts([data.product]);
     } else {
       setProducts([]);
       setError("Product not found with that barcode.");
+    }
+  };
+
+  const fetchProductsByCategory = async (category) => {
+    if (!category) return;
+    setError("");
+    const res = await fetch(
+      `https://world.openfoodfacts.org/category/${category}.json`
+    );
+    const data = await res.json();
+    if (data.products) {
+      setProducts(data.products.slice(0, 20));
+    } else {
+      setError("No products found in this category.");
     }
   };
 
@@ -38,6 +53,7 @@ function App() {
       <h1 className="text-3xl font-bold text-center mb-4">🍎 Food Product Explorer</h1>
 
       <SearchBar onSearch={fetchProducts} onBarcodeSearch={fetchProductByBarcode} />
+      <CategoryFilter onCategorySelect={fetchProductsByCategory} />
 
       {error && <p className="text-red-500 text-center mb-4">{error}</p>}
 
