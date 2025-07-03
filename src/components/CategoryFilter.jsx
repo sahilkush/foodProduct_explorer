@@ -6,7 +6,7 @@ function CategoryFilter({ onCategorySelect }) {
 
   const fetchCategories = async () => {
     setLoading(true);
-    const res = await fetch("https://world.openfoodfacts.org/categories.json");
+    const res = await fetch("/categories.json");
     const data = await res.json();
     const topCategories = data.tags.slice(0, 20); // only first 20
     setCategories(topCategories);
@@ -18,7 +18,7 @@ function CategoryFilter({ onCategorySelect }) {
   }, []);
 
   return (
-    <div className="mb-6 flex justify-center">
+    <div className="border border-gray-300 px-0 py-2 rounded w-80 sm:w-80">
       <select
         onChange={(e) => onCategorySelect(e.target.value)}
         className="border border-gray-300 px-4 py-2 rounded w-80"
