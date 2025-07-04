@@ -8,16 +8,26 @@ function App() {
   const [products, setProducts] = useState([]);
   const [originalProducts, setOriginalProducts] = useState([]);
   const [error, setError] = useState("");
+  const [page, setPage] = useState(1);
+  const [lastSearchTerm, setLastSearchTerm] = useState("food");
 
-  const fetchProducts = async (searchTerm = "food") => {
-    setError("");
-    const res = await fetch(
-      `https://world.openfoodfacts.org/cgi/search.pl?search_terms=${searchTerm}&page=1&page_size=20&json=true`
-    );
-    const data = await res.json();
-    setProducts(data.products);
-    setOriginalProducts(data.products);
-  };
+  const fetchProducts = async (searchTerm = "food", nextPage = 1, append = false) => {
+  setError("");
+  setLastSearchTerm(searchTerm);
+  const res = await fetch(
+    `https://world.openfoodfacts.org/cgi/search.pl?search_terms=${searchTerm}&page=${nextPage}&page_size=20&json=true`
+  );
+  const data = await res.json();
+  const newProducts = data.products;
+
+  if (append) {
+    setProducts((prev) => [...prev, ...newProducts]);
+    setOriginalProducts((prev) => [...prev, ...newProducts]);
+  } else {
+    setProducts(newProducts);
+    setOriginalProducts(newProducts);
+  }
+};
 
   const fetchProductByBarcode = async (barcode) => {
     setError("");
@@ -104,6 +114,20 @@ function App() {
         ))
       )}
     </div>
+    {products.length > 0 && (
+  <div className="flex justify-center mt-6">
+    <button
+      onClick={() => {
+        const nextPage = page + 1;
+        setPage(nextPage);
+        fetchProducts(lastSearchTerm, nextPage, true);
+      }}
+      className="bg-green-500 text-white px-6 py-2 rounded hover:bg-green-600"
+    >
+      Load More
+    </button>
+  </div>
+)}
   </div>
 );
 
