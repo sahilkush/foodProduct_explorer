@@ -16,7 +16,7 @@ function SearchBar({ onSearch, onBarcodeSearch }) {
   };
 
   return (
-    <form onSubmit={handleSubmit} className="flex flex-col items-center gap-4 mb-6">
+    <form onSubmit={handleSubmit} className=" flex-end flex-col items-end gap-4 mb-6">
       <div className="flex gap-2">
         <input
           type="text"
@@ -33,15 +33,15 @@ function SearchBar({ onSearch, onBarcodeSearch }) {
         </button>
       </div>
 
-      <div className="flex gap-4 text-sm">
-        <label>
+      <div className="flex gap-4 text-sm text-white">
+        <label >
           <input
             type="radio"
             name="mode"
             value="name"
             checked={mode === "name"}
             onChange={() => setMode("name")}
-            className="mr-1"
+            className="mr-1 bg-black"
           />
           Search by Name
         </label>

@@ -74,17 +74,24 @@ function App() {
   }, []);
 
   return (
-    <div className="min-h-screen bg-gray-100 p-4 sm:p-6">
-      <h1 className="text-3xl font-bold text-center mb-4">🍎 Food Product Explorer</h1>
+    <div className="min-h-screen grid-cols-4 bg-slate-900 p-4 sm:p-6">
+      <div className="flex justify-start justify-between">
+          <h1 className="text-3xl text-white font-bold text-left mb-4"> Food Product Explorer</h1>
+          <SearchBar onSearch={fetchProducts} onBarcodeSearch={fetchProductByBarcode} />
+      </div>
 
-      <SearchBar onSearch={fetchProducts} onBarcodeSearch={fetchProductByBarcode} />
-      <CategoryFilter onCategorySelect={fetchProductsByCategory} />
-      <SortDropdown onSort={sortProducts} />
-
+      
       {error && <p className="text-red-500 text-center mb-4">{error}</p>}
 
+      <div className="flex justify-end gap-4 mb-4 w-full">
+          <CategoryFilter onCategorySelect={fetchProductsByCategory} />
+          <SortDropdown onSort={sortProducts} />  
+        </div>
+
       <div className={`transition-all duration-300 sm:h-[calc(100vh-10rem)] sm:flex sm:gap-6`}>
-        <div className={`${selectedProduct ? 'sm:w-2/3' : 'w-full'} grid grid-cols-1 sm:grid-cols-2 gap-4 overflow-y-auto pr-2`}>
+        
+        <div className={`${selectedProduct ? 'sm:w-2/3' : 'w-full'} grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4  gap-4 overflow-y-auto pr-2 `}>
+        
           {products.length === 0 && !error ? (
             <p className="text-center col-span-full">No products to show.</p>
           ) : (
@@ -96,6 +103,7 @@ function App() {
               />
             ))
           )}
+          
         </div>
 
         {selectedProduct && (
