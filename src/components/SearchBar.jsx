@@ -41,7 +41,7 @@ function SearchBar({ onSearch, onBarcodeSearch }) {
             value="name"
             checked={mode === "name"}
             onChange={() => setMode("name")}
-            className="mr-1 bg-black"
+            className="mr-1"
           />
           Search by Name
         </label>

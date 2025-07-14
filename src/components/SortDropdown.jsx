@@ -1,6 +1,6 @@
 function SortDropdown({ onSort }) {
   return (
-    <div className="border border-none px-0 py-2 rounded w-80 sm:w-80 bg-slate-900 ml-2 w-0">
+    <div className="border border-none px-0 py-2 rounded w-80 sm:w-80 bg-slate-900 ml-2 ">
       <select
         onChange={(e) => onSort(e.target.value)}
         className="border border-gray-300 px-4 py-2 rounded w-80 bg-slate-700 hover:bg-slate-800"
