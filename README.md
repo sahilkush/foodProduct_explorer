@@ -15,6 +15,7 @@ Coming soon...
 - 🗂️ Filter products by category
 - ↕️ Sort products by nutrition grade
 - 📦 View detailed product information including ingredients, nutrition facts, and barcode
+- 💥 Fully Dockerized with CI/CD
 
 -------------------------
 
@@ -22,8 +23,21 @@ Coming soon...
 
 - **Frontend:** React, Tailwind CSS
 - **API:** OpenFoodFacts
+- Docker
+- GitHub Actions (CI/CD)
 
 -------------------------
+🐳 Run the App Using Docker
+
+To pull and run the app from Docker Hub:
+
+```bash
+docker pull yourusername/food-explorer-app:v1.0
+docker run -d -p 3000:80 yourusername/food-explorer-app:v1.0
+
+~Then open http://localhost:3000 in your browser.
+
+You must have Docker installed on your machine.
 
 🛠️ Installation
 
