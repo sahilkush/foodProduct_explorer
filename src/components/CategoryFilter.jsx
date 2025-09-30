@@ -1,9 +1,16 @@
 import { useEffect, useState } from "react";
 
+/**
+ * CategoryFilter component that provides category-based filtering for products
+ * @param {Function} onCategorySelect - Callback function triggered when category is selected
+ */
 function CategoryFilter({ onCategorySelect }) {
   const [categories, setCategories] = useState([]);
   const [loading, setLoading] = useState(false);
 
+  /**
+   * Fetches available categories from the local categories.json file
+   */
   const fetchCategories = async () => {
     setLoading(true);
     const res = await fetch("/categories.json");

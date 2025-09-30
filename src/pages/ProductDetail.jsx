@@ -1,12 +1,19 @@
 import { useParams, Link } from "react-router-dom";
 import { useEffect, useState } from "react";
 
+/**
+ * ProductDetail component that displays detailed information about a specific product
+ * Fetches product data based on barcode from URL parameters
+ */
 function ProductDetail() {
   const { barcode } = useParams();
   const [product, setProduct] = useState(null);
   const [error, setError] = useState("");
 
   useEffect(() => {
+    /**
+     * Fetches product details from OpenFoodFacts API using the barcode
+     */
     const fetchProduct = async () => {
       const res = await fetch(`https://world.openfoodfacts.org/api/v0/product/${barcode}.json`);
       const data = await res.json();
