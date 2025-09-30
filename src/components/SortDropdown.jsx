@@ -1,3 +1,7 @@
+/**
+ * SortDropdown component that provides sorting options for products
+ * @param {Function} onSort - Callback function triggered when sort option changes
+ */
 function SortDropdown({ onSort }) {
   return (
     <div className="border border-none px-0 py-2 rounded w-80 sm:w-80 bg-slate-900 ml-2 ">

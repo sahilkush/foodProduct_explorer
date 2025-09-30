@@ -1,3 +1,10 @@
+import Recommendations from "./recommendation";
+
+/**
+ * ProductDetailPanel component that displays detailed product information in a side panel
+ * @param {Object} product - The product object containing product information
+ * @param {Function} onClose - Callback function to close the panel
+ */
 function ProductDetailPanel({ product, onClose }) {
   if (!product) return null;
 
@@ -28,6 +35,11 @@ function ProductDetailPanel({ product, onClose }) {
         <li>Carbs: {product.nutriments?.carbohydrates || "N/A"} g</li>
         <li>Proteins: {product.nutriments?.proteins || "N/A"} g</li>
       </ul>
+      
+      <Recommendations 
+        category={product.categories_tags?.[0]} 
+        currentGrade={product.nutriscore_grade} 
+      />
     </div>
   );
 }

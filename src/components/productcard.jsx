@@ -1,3 +1,8 @@
+/**
+ * ProductCard component that displays a product in a card format
+ * @param {Object} product - The product object containing product information
+ * @param {Function} onSelect - Callback function triggered when card is clicked
+ */
 function ProductCard({ product, onSelect }) {
   return (
     <div

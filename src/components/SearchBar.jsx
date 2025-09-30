@@ -1,9 +1,19 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
+/**
+ * SearchBar component that provides search functionality for products
+ * Supports both name-based and barcode-based searching
+ * @param {Function} onSearch - Callback function for name-based search
+ * @param {Function} onBarcodeSearch - Callback function for barcode-based search
+ */
 function SearchBar({ onSearch, onBarcodeSearch }) {
   const [query, setQuery] = useState("");
   const [mode, setMode] = useState("name"); // name or barcode
 
+  /**
+   * Handles form submission and triggers appropriate search function
+   * @param {Event} e - Form submit event
+   */
   const handleSubmit = (e) => {
     e.preventDefault();
     if (!query.trim()) return;
@@ -14,6 +24,16 @@ function SearchBar({ onSearch, onBarcodeSearch }) {
       onBarcodeSearch(query.trim());
     }
   };
+
+  // Debounce name-based search on input change
+  useEffect(() => {
+    if (mode !== "name") return;
+    if (!query.trim()) return;
+    const id = setTimeout(() => {
+      onSearch(query.trim());
+    }, 500);
+    return () => clearTimeout(id);
+  }, [query, mode, onSearch]);
 
   return (
     <form onSubmit={handleSubmit} className=" flex-end flex-col items-end gap-4 mb-6">
